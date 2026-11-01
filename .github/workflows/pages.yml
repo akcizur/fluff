@@ -30,8 +30,11 @@ jobs:
         shell: bash
         run: |
           if compgen -G "fluff-source-bundle.part*" > /dev/null; then
+            cp .github/workflows/pages.yml /tmp/fluff-pages.yml
             cat fluff-source-bundle.part* | base64 --decode > source-bundle.tar.xz
             tar -xJf source-bundle.tar.xz -C .
+            mkdir -p .github/workflows
+            cp /tmp/fluff-pages.yml .github/workflows/pages.yml
             rm -f source-bundle.tar.xz fluff-source-bundle.part* source-bundle.tar.xz.part*
           fi
       - name: Materialize the normal source tree in main
