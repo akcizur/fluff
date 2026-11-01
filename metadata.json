@@ -1,0 +1,9 @@
+{
+  "name": "Remix Jakub Růžička - Cinematic Portfolio",
+  "description": "Accessible cinematic portfolio with symmetric glass edges, smooth parallax, dark mode, and Jacquard 12 whole-title font switching triggered by scroll.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API",
+    "SCROLL_TRIGGERED_WHOLE_TITLE_FONT_SWITCHING"
+  ]
+}
