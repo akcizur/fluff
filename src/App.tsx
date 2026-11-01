@@ -453,7 +453,8 @@ export default function App() {
   useEffect(() => {
     const selector = '.hero h1, .section h2, .visual-stage-title, .text-shadow-3d, #synthesis .project-panel__info h3';
     const readingLineRatio = 0.52;
-    const deadZone = 42;
+    // A full crossing must clear 72px on each side of the reading line.
+    const deadZone = 72;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const initialized = new WeakSet<HTMLElement>();
     const lastSides = new Map<HTMLElement, ScrollSide>();
@@ -510,8 +511,9 @@ export default function App() {
         if (!lastSides.has(element)) {
           const rect = element.getBoundingClientRect();
           const distance = rect.top + rect.height / 2 - line;
-          const outsideSide = getScrollSide(distance, deadZone);
-          lastSides.set(element, outsideSide || (distance >= 0 ? 1 : -1));
+          // Keep headings inside the dead zone neutral. Guessing a side here
+          // makes a tiny scroll near the reading line look like a full crossing.
+          lastSides.set(element, getScrollSide(distance, deadZone));
         }
       });
     };
